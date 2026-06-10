@@ -1,0 +1,4 @@
+# 純靜態頁，無需 build。發佈整個 repo 根目錄。
+[build]
+  publish = "."
+  command = ""

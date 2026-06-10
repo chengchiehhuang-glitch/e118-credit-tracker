@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>畢業旅程 · 學分</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1018; --bg2:#141A26; --ink:#F3EFE7; --ink2:#9AA2B4; --ink3:#5C6477;
+  --gold:#E7B65A; --glass:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+  --c0:#5BD0E0; --c1:#E7B65A; --c2:#F0708C; --c3:#9F8BF0; --c4:#5FCF92;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Manrope","Noto Sans TC",system-ui,sans-serif;color:var(--ink);background:var(--bg);
+  min-height:100dvh;line-height:1.5;padding-bottom:calc(92px + env(safe-area-inset-bottom));position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(70% 50% at 78% -5%,rgba(231,182,90,.16),transparent 60%),
+    radial-gradient(80% 55% at 10% 8%,rgba(159,139,240,.16),transparent 55%),
+    radial-gradient(90% 60% at 50% 105%,rgba(91,208,224,.10),transparent 55%)}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+.wrap{max-width:620px;margin:0 auto;padding:0 18px;position:relative;z-index:1}
+.num{font-variant-numeric:tabular-nums}
+
+header{padding:24px 0 6px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.brand .bd{color:var(--gold)}
+.tagline{font-size:11px;letter-spacing:.22em;color:var(--ink3);text-transform:uppercase;font-weight:600}
+
+/* hero rings */
+.hero{display:flex;flex-direction:column;align-items:center;padding:14px 0 6px}
+.rings{position:relative;width:264px;height:264px}
+.rings svg{transform:rotate(-90deg);filter:drop-shadow(0 8px 26px rgba(0,0,0,.5))}
+.rings .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ctr .lab{font-size:10px;letter-spacing:.2em;color:var(--ink3);text-transform:uppercase;font-weight:700;margin-bottom:1px}
+.ctr .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:50px;line-height:.9;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ctr .unit{font-size:10px;letter-spacing:.22em;color:var(--ink2);font-weight:700;margin-top:3px}
+.restcap{text-align:center;font-size:13px;color:var(--ink2);margin-top:12px;font-weight:600}
+.restcap b{color:var(--gold);font-variant-numeric:tabular-nums}
+.headline{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:23px;text-align:center;margin:16px 0 4px;letter-spacing:-.01em}
+.headline .g{color:var(--gold)}
+.sub{font-size:13px;color:var(--ink2);text-align:center;max-width:340px;margin:0 auto}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;margin:18px auto 4px;max-width:440px}
+.lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);font-weight:500}
+.lg .d{width:9px;height:9px;border-radius:99px;box-shadow:0 0 10px currentColor}
+.lg b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+
+/* sections */
+.grp{margin-top:24px}
+.gh{display:flex;align-items:center;gap:10px;margin:0 4px 12px}
+.gh .d{width:11px;height:11px;border-radius:99px;box-shadow:0 0 12px currentColor}
+.gh .gn{font-family:"Bricolage Grotesque",sans-serif;font-size:16px;font-weight:700}
+.gh .gx{flex:1;height:1px;background:var(--line)}
+.gh .gf{font-size:13px;font-weight:700;color:var(--ink2);font-variant-numeric:tabular-nums}
+.gh .gf.ok{color:var(--c4)}
+.deck{display:flex;flex-direction:column;gap:9px}
+.cardc{display:flex;align-items:center;gap:13px;padding:14px 15px;border-radius:15px;cursor:pointer;
+  background:var(--glass);border:1px solid var(--line);transition:.22s;position:relative;overflow:hidden}
+.cardc:active{transform:scale(.985)}
+.cardc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cc);opacity:0;transition:.22s}
+.cardc.done{background:color-mix(in srgb,var(--cc) 15%,var(--glass));border-color:color-mix(in srgb,var(--cc) 40%,transparent)}
+.cardc.done::before{opacity:1}
+.dot{flex:0 0 24px;width:24px;height:24px;border-radius:50%;border:2px solid var(--ink3);display:grid;place-items:center;transition:.22s}
+.cardc.done .dot{background:var(--cc);border-color:var(--cc);box-shadow:0 0 14px color-mix(in srgb,var(--cc) 70%,transparent)}
+.dot svg{opacity:0;transform:scale(.4);transition:.22s}
+.cardc.done .dot svg{opacity:1;transform:scale(1)}
+.cnm{flex:1;font-size:14.5px;font-weight:500}
+.cardc.done .cnm{color:var(--ink)}
+.ccr{font-family:"Bricolage Grotesque",sans-serif;font-size:14px;font-weight:700;color:var(--ink3)}
+.cardc.done .ccr{color:var(--cc)}
+.adder{padding:12px 15px;border:1px dashed var(--line);border-radius:14px;color:var(--ink2);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px}
+.adder:active{background:var(--glass)}
+.del{font-size:11px;color:#f0708c;margin-left:8px;font-weight:600}
+.foot{font-size:12px;color:var(--ink3);text-align:center;line-height:1.7;margin:28px 0 6px}
+
+/* bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 18px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(12,16,24,0),var(--bg) 40%)}
+.bar .in{max-width:620px;margin:0 auto;display:flex;gap:10px}
+.b{flex:1;border:1px solid var(--line);background:var(--bg2);color:var(--ink);border-radius:14px;padding:13px;
+  font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+.b.main{background:linear-gradient(135deg,var(--gold),#d79f3f);color:#241a06;border:none}
+.b:active{transform:translateY(1px)}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(5,7,12,.6);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center;z-index:60}
+.scrim.on{display:flex}
+.sheet{background:var(--bg2);width:100%;max-width:620px;border-radius:22px 22px 0 0;border-top:1px solid var(--line);
+  padding:8px 20px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -16px 50px rgba(0,0,0,.6);animation:up .32s cubic-bezier(.2,.8,.2,1)}
+.grab{width:38px;height:5px;border-radius:99px;background:#39404f;margin:8px auto 16px}
+@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet h3{font-family:"Bricolage Grotesque",sans-serif;font-size:19px;font-weight:700;margin-bottom:6px}
+.sheet p{font-size:13px;color:var(--ink2);margin-bottom:14px}
+.field{width:100%;border:1px solid var(--line);background:#0e131d;border-radius:12px;padding:12px;font-family:inherit;font-size:14px;color:var(--ink);resize:none}
+.linkbox{display:flex;gap:8px;margin:9px 0}
+.linkbox input{flex:1;border:1px solid var(--line);background:#0e131d;border-radius:11px;padding:11px;font-size:12px;color:var(--ink2);font-family:ui-monospace,monospace}
+.cpy{border:none;background:linear-gradient(135deg,var(--gold),#d79f3f);color:#241a06;border-radius:11px;padding:0 16px;font-weight:700;font-size:13px;cursor:pointer}
+.row2{display:flex;gap:10px;margin-top:14px}
+.selwrap{display:flex;gap:8px;margin-top:10px}
+.selwrap select,.selwrap input{border:1px solid var(--line);background:#0e131d;color:var(--ink);border-radius:11px;padding:12px;font-family:inherit;font-size:14px}
+.selwrap input{width:84px}
+.hint{font-size:12px;color:var(--gold);background:rgba(231,182,90,.08);border:1px solid rgba(231,182,90,.2);border-radius:11px;padding:11px;margin-top:12px;line-height:1.6}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(16px);background:#fff;color:#0C1018;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;opacity:0;transition:.28s;z-index:70;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="brand">畢業旅程<span class="bd">.</span></div><div class="tagline">NCKU EMBA</div></header>
+
+  <section class="hero">
+    <div class="rings">
+      <svg width="264" height="264" viewBox="0 0 264 264" id="rsvg"></svg>
+      <div class="ctr">
+        <div class="big num"><span id="rem">45</span></div>
+        <div class="unit">學分待修</div>
+      </div>
+    </div>
+    <div class="restcap">已修 <b class="num" id="doneN">0</b> / 45 學分</div>
+    <div class="headline" id="headline">點亮你的五個圈</div>
+    <div class="sub" id="sub">每修完一門課，對應的圈就更滿一點。把五個圈都點滿，就畢業了。</div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <div id="groups"></div>
+  <p class="foot">僅供個人自我追蹤，畢業資格以系辦審核為準。<br>紀錄只存在這支手機，不會上傳雲端。</p>
+</div>
+
+<div class="bar"><div class="in">
+  <button class="b main" onclick="openBackup()">📲 備份／換手機</button>
+  <button class="b" onclick="openRestore()">↺ 還原</button>
+</div></div>
+
+<div class="scrim" id="scrimB"><div class="sheet"><div class="grab"></div>
+  <h3>備份 · 換手機</h3>
+  <p>紀錄只存在這支手機。把這條「專屬連結」用 LINE 傳給自己，<b style="color:var(--gold)">新手機點開就自動還原</b>。</p>
+  <div class="linkbox"><input id="bLink" readonly><button class="cpy" onclick="copy('bLink','已複製連結')">複製</button></div>
+  <p style="margin:12px 0 4px">或複製短代碼，到新手機按「還原」貼上：</p>
+  <div class="linkbox"><input id="bCode" readonly><button class="cpy" onclick="copy('bCode','已複製代碼')">複製</button></div>
+  <div class="hint">💡 傳到自己 LINE 的「Keep 記事」最保險，永遠找得到。</div>
+  <div class="row2"><button class="b" onclick="closeAll()">關閉</button></div>
+</div></div>
+
+<div class="scrim" id="scrimR"><div class="sheet"><div class="grab"></div>
+  <h3>還原紀錄</h3><p>貼上之前備份的連結或短代碼。</p>
+  <textarea class="field" id="rIn" rows="3" placeholder="貼上連結或代碼…"></textarea>
+  <div class="row2"><button class="b" onclick="closeAll()">取消</button><button class="b main" onclick="doRestore()">還原</button></div>
+</div></div>
+
+<div class="scrim" id="scrimA"><div class="sheet"><div class="grab"></div>
+  <h3>新增課程</h3><p>母清單沒有的課，自己加進來。</p>
+  <input class="field" id="aName" placeholder="課程名稱">
+  <div class="selwrap"><select id="aCat"></select><input id="aCr" type="number" inputmode="numeric" value="3" placeholder="學分"></div>
+  <div class="row2"><button class="b" onclick="closeAll()">取消</button><button class="b main" onclick="doAdd()">新增並打勾</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="core.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const COL=['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+const HEX=['#5BD0E0','#E7B65A','#F0708C','#9F8BF0','#5FCF92'];
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('on'),1600)}
+function copy(id,m){const el=document.getElementById(id);el.select();navigator.clipboard?.writeText(el.value).then(()=>toast(m)).catch(()=>{document.execCommand('copy');toast(m)})}
+const tick='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0C1018" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>';
+
+// build concentric rings once
+const radii=[122,102,82,62,42], cx=132, sw=13;
+function buildRings(){
+  let s='';
+  CATEGORIES.forEach((cat,i)=>{
+    const r=radii[i], c=2*Math.PI*r;
+    s+=`<circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="${sw}"/>`;
+    s+=`<circle id="ring${i}" cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${HEX[i]}" stroke-width="${sw}"
+        stroke-linecap="round" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${c.toFixed(1)}"
+        style="filter:drop-shadow(0 0 6px ${HEX[i]}88);transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1) ${i*0.08}s"/>`;
+  });
+  $('#rsvg').innerHTML=s;
+}
+
+function render(){
+  const r=Tracker.compute();
+  $('#rem').textContent=r.remaining; $('#doneN').textContent=r.totalDone;
+  CATEGORIES.forEach((cat,i)=>{
+    const b=r.byCat[cat.key], rad=radii[i], c=2*Math.PI*rad;
+    const p=Math.min(1,b.done/cat.req);
+    const el=document.getElementById('ring'+i); if(el) el.style.strokeDashoffset=(c*(1-p)).toFixed(1);
+  });
+  if(r.graduated){$('#headline').innerHTML='🎓 五個圈都點滿了！';$('#sub').textContent='學分達標，畢業在望，恭喜你！';}
+  else{$('#headline').innerHTML='離畢業還差 <span class="g num">'+r.remaining+'</span> 學分';
+    $('#sub').textContent=r.gaps.length?('還沒補滿：'+r.gaps.map(g=>g.key).join('、')):'總學分快到了，再衝一下！';}
+  $('#legend').innerHTML=CATEGORIES.map((cat,i)=>{const b=r.byCat[cat.key];
+    return `<span class="lg"><span class="d" style="background:${HEX[i]};color:${HEX[i]}"></span>${cat.key} <b>${b.done}/${cat.req}</b></span>`}).join('');
+  $('#groups').innerHTML=CATEGORIES.map((cat,i)=>{
+    const b=r.byCat[cat.key],ok=b.done>=cat.req;
+    const cards=b.courses.map(c=>{const done=Tracker.isDone(c.id),cust=String(c.id).startsWith('x');
+      return `<div class="cardc ${done?'done':''}" style="--cc:${HEX[i]}" onclick="tog('${c.id}')">
+        <div class="dot">${tick}</div>
+        <div class="cnm">${c.n}${cust?'<span class="del" onclick="event.stopPropagation();delC(\''+c.id+'\')">刪</span>':''}</div>
+        <div class="ccr">${c.k}</div></div>`}).join('');
+    return `<section class="grp">
+      <div class="gh"><span class="d" style="background:${HEX[i]};color:${HEX[i]}"></span><span class="gn">${cat.key}</span><span class="gx"></span><span class="gf ${ok?'ok':''}">${b.done}/${cat.req}${ok?' ✓':''}</span></div>
+      <div class="deck">${cards}<div class="adder" onclick="openAdd('${cat.key}')">＋ 新增「${cat.key}」課程</div></div>
+    </section>`}).join('');
+}
+function tog(id){Tracker.toggle(id)}
+function delC(id){Tracker.removeCustom(id)}
+function openBackup(){$('#bLink').value=Tracker.backupLink();$('#bCode').value=Tracker.code();$('#scrimB').classList.add('on')}
+function openRestore(){$('#rIn').value='';$('#scrimR').classList.add('on')}
+function openAdd(cat){$('#aName').value='';$('#aCr').value=3;$('#aCat').innerHTML=CATEGORIES.map(c=>`<option ${c.key===cat?'selected':''}>${c.key}</option>`).join('');$('#scrimA').classList.add('on')}
+function closeAll(){document.querySelectorAll('.scrim').forEach(s=>s.classList.remove('on'))}
+function doRestore(){try{Tracker.importCode($('#rIn').value);closeAll();toast('已還原 ✓')}catch(e){toast('代碼無法辨識')}}
+function doAdd(){const n=$('#aName').value.trim();if(!n)return toast('請輸入課名');Tracker.addCustom(n,$('#aCat').value,$('#aCr').value);closeAll();toast('已新增 ✓')}
+document.querySelectorAll('.scrim').forEach(s=>s.addEventListener('click',e=>{if(e.target===s)closeAll()}));
+window.addEventListener('tracker:change',render);
+
+buildRings();
+const fromUrl=Tracker.load();
+if(fromUrl&&(fromUrl.d?.length||fromUrl.x?.length)){setTimeout(()=>{if(confirm('偵測到備份連結，要用它還原嗎？')){Tracker._apply(fromUrl);Tracker.save();}render();history.replaceState(null,'',location.pathname)},300)}
+requestAnimationFrame(()=>render());
+</script>
+</body>
+</html>

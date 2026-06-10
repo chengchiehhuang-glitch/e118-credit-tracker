@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>學分追蹤 · 三版本預覽</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC",system-ui,sans-serif;background:#0C1018;color:#F3EFE7;min-height:100dvh;padding:40px 20px 60px;
+  background-image:radial-gradient(70% 50% at 80% 0,rgba(231,182,90,.12),transparent 55%),radial-gradient(70% 50% at 10% 10%,rgba(159,139,240,.12),transparent 50%)}
+.wrap{max-width:760px;margin:0 auto}
+.kick{font-size:12px;letter-spacing:.22em;color:#9AA2B4;text-transform:uppercase;font-weight:700}
+h1{font-family:"Bricolage Grotesque",sans-serif;font-size:30px;font-weight:800;margin:6px 0 6px;letter-spacing:-.01em}
+.lede{color:#9AA2B4;font-size:14px;margin-bottom:28px;line-height:1.7}
+.grid{display:grid;gap:16px}
+@media(min-width:620px){.grid{grid-template-columns:1fr 1fr 1fr}}
+a.card{display:block;text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;
+  background:rgba(255,255,255,.04);transition:.2s}
+a.card:hover{transform:translateY(-3px);border-color:rgba(231,182,90,.4)}
+.swatch{height:96px;display:flex;align-items:center;justify-content:center;font-family:"Bricolage Grotesque";font-weight:800;font-size:34px}
+.s1{background:linear-gradient(135deg,#F4EEE2,#8A2E3B);color:#fff}
+.s2{background:linear-gradient(135deg,#EFEFF3,#1FA463);color:#fff}
+.s3{background:linear-gradient(135deg,#141A26,#E7B65A);color:#241a06}
+.meta{padding:15px 16px}
+.meta h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.meta p{font-size:12.5px;color:#9AA2B4;line-height:1.6}
+.tip{margin-top:28px;font-size:13px;color:#9AA2B4;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick">NCKU EMBA · 學分自我追蹤</div>
+  <h1>三個設計版本</h1>
+  <p class="lede">同一顆引擎（真實課程清單 + 自動算學分 + 換手機備份），三種不同氣質。點進去試手感，告訴我哪個方向，我再細修並上官網。</p>
+  <div class="grid">
+    <a class="card" href="v1-dashboard.html"><div class="swatch s1">A</div><div class="meta"><h3>儀表板</h3><p>學院沉穩風。大進度環＋五大類卡片，總覽優先，點開才看課。</p></div></a>
+    <a class="card" href="v2-checklist.html"><div class="swatch s2">B</div><div class="meta"><h3>清單打勾</h3><p>iOS 極簡。最像 App、最好上手，課程一目了然，大圈圈一點就勾。</p></div></a>
+    <a class="card" href="v3-journey.html"><div class="swatch s3">C</div><div class="meta"><h3>畢業旅程</h3><p>深色激勵風。五大類做成同心圓，修愈多圈愈滿，最有門面感。</p></div></a>
+  </div>
+  <div class="tip">📲 <b>換手機怎麼辦？</b> 三個版本都內建「備份／換手機」：把專屬連結用 LINE 傳給自己，新手機點開就自動還原打勾紀錄。資料全程只存在你的手機、不上傳。</div>
+</div>
+</body>
+</html>
