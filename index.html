@@ -154,24 +154,30 @@ header{padding:26px 0 8px;display:flex;align-items:baseline;justify-content:spac
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;z-index:60;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 .foot{font-size:12px;color:var(--ink2);text-align:center;margin:24px 0 4px;line-height:1.8}
+/* 個人資料卡 + 匯出（export.js）*/
+.profile{padding:18px;margin-top:14px}
+.pf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.pf-f{display:block}
+.pf-f span{display:block;font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:.08em;margin-bottom:6px}
+.pf-hint{font-size:12px;color:var(--ink2);margin:10px 2px 0;line-height:1.6}
+.btn.export{width:100%;margin-top:16px}
+.exsum{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:4px 0 14px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px}
+.exsum dt{color:var(--ink2)}
+.exsum dd{font-weight:700;word-break:break-all}
+.excheck{display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 2px;cursor:pointer;font-size:15px;font-weight:700}
+.excheck input{flex:0 0 24px;width:24px;height:24px;accent-color:var(--wine)}
+.sheet p.exnote{font-size:12px;line-height:1.6;margin:2px 2px 0}
+.exerr{margin-top:12px;padding:10px 12px;border-radius:10px;background:#F3E3E4;color:var(--wine-d);font-size:13px;line-height:1.6}
+.btn:disabled{opacity:.6;cursor:default}
 </style>
 </head>
 <body>
 <!-- Breadcrumb — 樣式同步於 e118-dashboard repo 的 components/Breadcrumb.tsx -->
 <nav aria-label="breadcrumb" style="background:#2C0A10;color:#C9A961;padding:6px 0;font-size:12.5px;border-bottom:1px solid #4B1119;font-family:system-ui,-apple-system,'PingFang TC','Noto Sans TC',sans-serif">
   <ol style="max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;list-style:none">
-    <li id="panelCrumb" style="display:inline-flex;align-items:center;gap:8px"><a href="https://emba.aqualux.dev/" style="color:#C9A961;text-decoration:none;padding:2px 6px;border-radius:3px" aria-label="回到班級面板">← 班級面板</a><span aria-hidden="true" style="color:rgba(201,169,97,.5)">/</span></li>
     <li style="display:inline-flex;align-items:center;gap:8px"><span aria-current="page" style="color:rgba(255,255,255,.85);font-weight:500">學分追蹤</span></li>
   </ol>
 </nav>
-<script>
-  // 從 EMBA 資源書院（不分屆別公開頁）連進來時，隱藏「回到班級面板」——
-  // 那是 E118 屆別專屬內部面板，不該從公開資源站被連過去。
-  if (new URLSearchParams(location.search).get('src') === 'resources') {
-    var el = document.getElementById('panelCrumb');
-    if (el) el.style.display = 'none';
-  }
-</script>
 <div class="wrap">
   <header>
     <div>
@@ -200,13 +206,23 @@ header{padding:26px 0 8px;display:flex;align-items:baseline;justify-content:spac
     </div>
   </section>
 
+  <div class="sec-h"><h2>個人資料</h2><div class="rule"></div></div>
+  <section class="card profile">
+    <div class="pf-grid">
+      <label class="pf-f"><span>姓名</span><input class="field" id="pfName" type="text" autocomplete="name" placeholder="例：王小明" maxlength="40"></label>
+      <label class="pf-f"><span>學號</span><input class="field" id="pfSid" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="例：E118001" maxlength="24"></label>
+    </div>
+    <p class="pf-hint">姓名與學號只用在匯出的學分單上，存在這支手機。</p>
+    <button class="btn primary export" id="exBtn" type="button">📄 匯出 PDF</button>
+  </section>
+
   <div class="sec-h"><h2>各類別進度</h2><div class="rule"></div></div>
   <div class="cards" id="cards"></div>
 
   <p class="foot">
     依成大 EMBA 修課規則：畢業 45 學分（基礎9／核心15／必修3／專業必選3／選修15），論文 6 學分另計。<br>
     「其他／活動學分」之採認與歸類以系辦公告為準。此表僅供個人自我追蹤。<br>
-    資料只存在你這支手機，不會上傳。
+    資料只存在你這支手機；只有你在匯出時主動勾選「同步上傳」，才會傳給系辦。
   </p>
 </div>
 
@@ -242,7 +258,7 @@ header{padding:26px 0 8px;display:flex;align-items:baseline;justify-content:spac
   <button class="xclose" onclick="closeAll()" aria-label="關閉">✕</button>
   <h3>這個怎麼運作？</h3>
   <p>勾選你修過的課，上面的進度環跟學分缺口會自動算。不用註冊、不用登入。</p>
-  <p><b>· 紀錄存在哪？</b><br>只存在你「<b>這支裝置的這個瀏覽器</b>」裡（瀏覽器的本機儲存空間），<b>不會上傳、別人看不到</b>。所以每個人各記各的、互不影響。</p>
+  <p><b>· 紀錄存在哪？</b><br>只存在你「<b>這支裝置的這個瀏覽器</b>」裡（瀏覽器的本機儲存空間），<b>不會自動上傳、別人看不到</b>（只有匯出時你主動勾選「同步上傳」才會傳給系辦）。所以每個人各記各的、互不影響。</p>
   <p><b>· 會一直記得嗎？</b><br>會。關掉重開、關機都還在。但若你<b>清除瀏覽器資料、用無痕模式、或換手機／換瀏覽器</b>，紀錄不會自己跟過去 —— 這時用左邊「備份」把專屬連結傳給自己，新裝置點開就還原。</p>
   <p style="color:var(--ink2);font-size:12.5px">此表僅供個人自我追蹤，學分採認以系辦公告為準。</p>
 </div></div>
@@ -260,10 +276,31 @@ header{padding:26px 0 8px;display:flex;align-items:baseline;justify-content:spac
   <div class="row2"><button class="btn primary" onclick="doAdd()">新增並打勾</button></div>
 </div></div>
 
+<!-- export -->
+<div class="scrim" id="scrimE"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="exTitle">
+  <button class="xclose" onclick="closeAll()" aria-label="關閉">✕</button>
+  <h3 id="exTitle">匯出學分單</h3>
+  <p>確認下面這份資料，沒問題就按「匯出」。</p>
+  <dl class="exsum">
+    <dt>姓名</dt><dd id="exSumName"></dd>
+    <dt>學號</dt><dd id="exSumSid"></dd>
+    <dt>勾選課程</dt><dd id="exSumCount"></dd>
+    <dt>合計學分</dt><dd id="exSumCr"></dd>
+  </dl>
+  <label class="excheck"><input type="checkbox" id="exUp"><span>同步上傳一份到系辦（Excel）</span></label>
+  <p class="exnote">上傳後系辦人員可在 E118 雲端資料夾看到這份學分單；同一人多次上傳都會保留，以日期區分。</p>
+  <div class="exerr" id="exErr" hidden></div>
+  <div class="row2"><button class="btn" id="exCancel" type="button" onclick="closeAll()">取消</button><button class="btn primary" id="exGo" type="button">匯出</button></div>
+</div></div>
+
 <div class="toast" id="toast"></div>
 
 <script src="data.js"></script>
 <script src="core.js"></script>
+<!-- 匯出用函式庫（defer，依序載入；載入失敗時 export.js 會給友善提示）-->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script defer src="export.js"></script>
 <script>
 const $=s=>document.querySelector(s), C=2*Math.PI*56;
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('on'),1700)}
