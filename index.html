@@ -174,10 +174,28 @@ header{padding:26px 0 8px;display:flex;align-items:baseline;justify-content:spac
 <body>
 <!-- Breadcrumb — 樣式同步於 e118-dashboard repo 的 components/Breadcrumb.tsx -->
 <nav aria-label="breadcrumb" style="background:#2C0A10;color:#C9A961;padding:6px 0;font-size:12.5px;border-bottom:1px solid #4B1119;font-family:system-ui,-apple-system,'PingFang TC','Noto Sans TC',sans-serif">
-  <ol style="max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;list-style:none">
+  <ol id="crumbs" style="max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;list-style:none">
     <li style="display:inline-flex;align-items:center;gap:8px"><span aria-current="page" style="color:rgba(255,255,255,.85);font-weight:500">學分追蹤</span></li>
   </ol>
 </nav>
+<script>
+  // 從 EMBA 資源書院（不分屆別公開頁）連進來時不顯示「回到班級面板」——
+  // 那是 E118 屆別專屬內部面板。連結不寫死在 HTML，只在 E118 模式才插入；
+  // 同一分頁內記住來源，重新整理或換頁後仍維持資源站模式。
+  (function () {
+    var fromRes = new URLSearchParams(location.search).get('src') === 'resources';
+    try {
+      if (fromRes) sessionStorage.setItem('emba_credits_src', 'resources');
+      else fromRes = sessionStorage.getItem('emba_credits_src') === 'resources';
+    } catch (e) {}
+    if (fromRes) return;
+    var li = document.createElement('li');
+    li.style.cssText = 'display:inline-flex;align-items:center;gap:8px';
+    li.innerHTML = '<a href="https://emba.aqualux.dev/" style="color:#C9A961;text-decoration:none;padding:2px 6px;border-radius:3px" aria-label="回到班級面板">← 班級面板</a><span aria-hidden="true" style="color:rgba(201,169,97,.5)">/</span>';
+    var ol = document.getElementById('crumbs');
+    ol.insertBefore(li, ol.firstChild);
+  })();
+</script>
 <div class="wrap">
   <header>
     <div>

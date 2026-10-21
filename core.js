@@ -113,7 +113,7 @@
     // ---- 備份 / 轉移 ----
     code() { return enc(JSON.stringify(this._payload())); },     // 短代碼字串
     backupLink() {                                               // 換手機用連結
-      return location.origin + location.pathname + '#d=' + this.code();
+      return location.origin + location.pathname + location.search + '#d=' + this.code();
     },
     importCode(str) {
       str = (str || '').trim();
