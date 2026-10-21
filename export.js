@@ -206,15 +206,18 @@
       return { preview: true };
     }
     const p = readProfile();
+    // 上傳碼：同一份檔案重送時後端認得出來，不會重複建檔
+    const uploadId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
     const res = await fetch(UPLOAD_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // text/plain：避免 CORS preflight（Apps Script 不處理 OPTIONS）
-      body: JSON.stringify({ filename, name: p.name, sid: p.sid, file: await blobToBase64(blob) }),
+      body: JSON.stringify({ uploadId, name: p.name, sid: p.sid, file: await blobToBase64(blob) }),
     });
     if (!res.ok) throw new Error('伺服器回應 ' + res.status);
     let data = null;
-    try { data = await res.json(); } catch (e) { /* 回應不是 JSON：以 HTTP 狀態為準 */ }
-    if (data && data.ok === false) throw new Error(data.error || '系辦端回報失敗');
+    try { data = await res.json(); } catch (e) { /* 讀不到 JSON 就不能確定有存進去 */ }
+    if (!data || data.ok !== true) throw new Error((data && data.error) || '無法確認系辦端是否收到，請稍後再試');
     return { preview: false };
   }
   window.uploadToOffice = uploadToOffice;
