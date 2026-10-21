@@ -198,7 +198,7 @@
   }
   // 回傳 { preview: true|false }；失敗時 throw（由呼叫端顯示提示）
   async function uploadToOffice(blob, filename) {
-    const UPLOAD_ENDPOINT = '';   // TODO 後端建好後填入 Google Apps Script web app 的 /exec 網址；空字串 = 預覽版
+    const UPLOAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwqsGGdhyUJcRYjYLwqZib-xpRaiKFmx9AVvFvGDk6HKJEFvIXlJjUSti_4ixHb5G714Q/exec';   // 學分追蹤-上傳後端（E118 帳號 Apps Script）；空字串 = 預覽版
     if (!UPLOAD_ENDPOINT) {
       // 預覽版：不真的上傳，直接下載系辦會收到的 Excel 供檢視
       downloadBlob(blob, filename);
